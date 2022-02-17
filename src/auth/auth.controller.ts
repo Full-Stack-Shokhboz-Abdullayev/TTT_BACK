@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBasicAuth, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { AuthGuard } from '../common/guards/auth.guard';
 import { LoginDto } from './dto/login.dto';
@@ -38,6 +38,7 @@ export class AuthController {
     throw new NotFoundException('Admin not found!');
   }
 
+  @ApiBasicAuth()
   @UseGuards(AuthGuard)
   @Get()
   getMe(@Req() req: IRequestUser) {
